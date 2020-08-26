@@ -1,0 +1,211 @@
+<app-modal class="modal_chucnang__wrapper" id="ctdt_monhoc">
+  <div (click)="closeModal('ctdt_monhoc')" class="modal_chucnang__close mdi mdi-chevron-left text-white"></div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white">Quản lý môn học</h1>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Tên môn học</label>
+                <input type="text" class="form-control" minlength="1" maxlength="50" [(ngModel)]="newMonHoc.tenMonHoc">
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="form-group">
+                  <label>Tên viết tắt</label>
+                  <input type="text" minlength="1" maxlength="15" class="form-control"
+                    [(ngModel)]="newMonHoc.tenVietTat">
+                </div>
+                <div class="form-group">
+                  <label>Loại môn học</label>
+                  <select class="form-control" [(ngModel)]="newMonHoc.maLoaiMonHoc">
+                    <option *ngFor="let lmh of dsLoaiMonHoc" [value]="lmh.maLoaiMonHoc">{{ lmh.tenLoaiMonHoc }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+              <div class="modal_chucnang__group__button">
+                <button (click)="postMonHoc()" class="modal_chucnang__button btn btn-outline-primary px-4 mx-2"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/add.png" alt="image icon">
+                  <div>Thêm mới</div>
+                </button>
+                <!-- <button (click)="updateMonHoc()" class="modal_chucnang__button btn btn-outline-success px-4 mx-2"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/upgrade.png" alt="image icon">
+                  <div>Cập nhật</div>
+                </button> -->
+                <button (click)="renewMonHoc()" class="modal_chucnang__button btn btn-outline-danger px-4 mx-2"
+                  type="reset"><img class="modal_chucnang__button__icon mb-2" src="assets/img/icons/error.png"
+                    alt="image icon">
+                  <div>Hủy</div>
+                </button>
+                <button data-toggle="modal" data-target="#importExcelMonHoc"
+                  class="modal_chucnang__button btn btn-outline-danger px-4 mx-2" type="button"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/error.png" alt="image icon">
+                  <div>Import Excel</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="d-flex align-items-center mb-2">
+            <label class="mb-0 d-flex align-items-center"><span class="text-nowrap">Trạng thái &nbsp;</span>
+              <select class="form-control" [(ngModel)]="trangThai" (change)="changeTrangThai()">
+                <option value="1">Hiện thị</option>
+                <option value="0">Đã xóa</option>
+              </select>
+            </label>
+            <label class="ml-auto mb-0 d-flex align-items-center"><span class="text-nowrap">Tìm kiếm: &nbsp;</span>
+              <input type="text" maxlength="20" class="form-control form-control-sm" placeholder="Tìm kiếm"
+                [(ngModel)]="searchMonHoc">
+            </label>
+          </div>
+          <table class="modal_chucnang__table table table-hover" id="danhsach_monhoc">
+            <thead class="bg__caothang text-white">
+              <th class="text-center" scope="col" style="max-width: 100px">Mã MH</th>
+              <th scope="col">Tên môn học</th>
+              <th scope="col">Tên viết tắt</th>
+              <th scope="col">Loại môn học</th>
+              <th class="text-center" scope="col">
+                <span role="button" (click)="getMonHoc()" title="Cập lại nhật danh sách môn học">
+                  <svg width="24" height="24" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M2.854 7.146a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L2.5 8.207l1.646 1.647a.5.5 0 0 0 .708-.708l-2-2zm13-1a.5.5 0 0 0-.708 0L13.5 7.793l-1.646-1.647a.5.5 0 0 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0 0-.708z" />
+                    <path fill-rule="evenodd"
+                      d="M8 3a4.995 4.995 0 0 0-4.192 2.273.5.5 0 0 1-.837-.546A6 6 0 0 1 14 8a.5.5 0 0 1-1.001 0 5 5 0 0 0-5-5zM2.5 7.5A.5.5 0 0 1 3 8a5 5 0 0 0 9.192 2.727.5.5 0 1 1 .837.546A6 6 0 0 1 2 8a.5.5 0 0 1 .501-.5z" />
+                  </svg>
+                </span></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let monHoc of dsMonHoc | filter:searchMonHoc">
+                <td style="max-width: 100px">
+                  <div class="text-left">{{ monHoc.maMonHoc }}</div>
+                </td>
+                <td>
+                  <div class="text-left">{{ monHoc.tenMonHoc }}</div>
+                </td>
+                <td>
+                  <div class="text-left">{{ monHoc.tenVietTat }}</div>
+                </td>
+                <td>
+                  <div class="text-left">{{ monHoc.maLoaiMonHoc }}</div>
+                </td>
+                <td hidden>
+                  <div class="text-left">{{ monHoc.tenMonHocKhongDau }}</div>
+                </td>
+                <td class="text-center">
+                  <ng-template [ngIf]="trangThai == 0" [ngIfElse]="deleted">
+                    <span title="Phục hồi" role="button" (click)="restoreMonHoc(monHoc.maMonHoc)">
+                      <svg width="24" height="24" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                          d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z" />
+                        <path fill-rule="evenodd"
+                          d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z" />
+                      </svg>
+                    </span>
+                  </ng-template>
+                  <ng-template #deleted>
+                    <span title="Chỉnh sửa" (click)="onSelect(monHoc.maMonHoc)" data-toggle="modal"
+                      data-target="#updateMonHoc" role="button"
+                      class="modal_chucnang__button__edit mdi mdi-file-document-edit-outline mdi-24px">
+                    </span>
+                    <span title="Xóa" (click)="deleteMonHoc(monHoc.maMonHoc)"
+                      class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px">
+                    </span>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="modal fade" id="importExcelMonHoc" tabindex="-1" role="dialog"
+            aria-labelledby="importExcelMonHocLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="importExcelMonHocLabel">Import Excel danh sách môn học <a
+                      class="btn btn-info btn-sm" (click)="downloadTemplate()" role="button">Tải xuống file mẫu</a></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <input type="file" (change)="onChange($event)" #inputFile>
+                  <div *ngIf="isExcelFile === false">
+                    This is not an Excel file
+                  </div>
+                  <button (click)="removeData()" *ngIf="dsMonHocfromExcel!== undefined">Remove Data</button>
+                  <table *ngIf="dsMonHocfromExcel!== undefined" class="table table-striped" style="margin-top: 10px;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th *ngFor="let key of keys" scope="col">{{key}}</th>
+                        <th *ngIf="importedExcel" scope="col">Trạng thái</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of dsMonHocfromExcel" [class.table-success]="item['success']"
+                        [class.table-danger]="!item['success']">
+                        <td *ngFor="let key of keys">
+                          {{item[key]}}
+                        </td>
+                        <td *ngIf="importedExcel">{{item["success"]===true? 'thành công':'đã tồn tại'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="button" class="btn btn-primary" (click)="importExcel()"
+                    *ngIf="dsMonHocfromExcel!== undefined">Import</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="updateMonHoc" tabindex="-1" role="dialog" aria-labelledby="exampleModal"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header alert alert-primary">
+            <h3 class="modal-title" id="exampleModalLongTitle">Cập nhật môn học</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên môn học</label>
+              <input class="form-control" type="text" [(ngModel)]="selectedMonHoc.tenMonHoc">
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <label>Tên viết tắt</label>
+                <input class="form-control" type="text" [(ngModel)]="selectedMonHoc.tenVietTat">
+              </div>
+              <div class="col">
+                <label>Loại môn học</label>
+                <select class="form-control" [(ngModel)]="selectedMonHoc.maLoaiMonHoc">
+                  <option *ngFor="let lmh of dsLoaiMonHoc" [value]="lmh.maLoaiMonHoc">{{ lmh.tenLoaiMonHoc }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button (click)="updateMonHoc()" type="button" class="btn btn-outline-info" data-dismiss="modal">Cập
+              nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

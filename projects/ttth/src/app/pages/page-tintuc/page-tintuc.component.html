@@ -1,0 +1,27 @@
+
+  <section class="mt-4">
+      <div class="container">
+          <div class="row">
+                  <div class="col-12">
+                          <div class="breadcrumbs">
+                              <a class="breadcrumb__step breadcrumb__step--active" href="/">Trang chủ</a>
+                              <a class="breadcrumb__step">Tin tức</a>
+                          </div>
+                  </div>
+          </div>
+      </div>
+  </section>
+  <section class="news mt-40">
+      <div class="container">
+          <div class="row" *ngFor="let item of TinTuc">
+              <div class="col-md-3">
+                  <div class="sub-news">
+                      <div class="img-wrap"><img src="{{item.image}}" alt="co-khi"></div><a class="sub-title" href="/chitiettintuc/{{item._id}}">{{item.tentintuc}}</a>
+                      <div class="posted"><i class="far fa-clock"></i>{{formatDatetime(item.created_at)}}</div>
+                      <div class="news-content" [innerHTML]="item.noidung">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>

@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 m-auto">
+      <h3 class="p-3 text-center style-title">Danh sách sinh viên</h3>
+      <div class="row mb-2">
+        <div class="col-md-8">
+
+        </div>
+        <div class="col-md-4">
+          <button type="button" style="float:right" (click)="exPortExcel()" class="btn btn-info">Export Excel</button>
+          <!-- <div class="btn-group ml-2">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Nhập từ
+            </button>
+            <div class="dropdown-menu">
+              <input type="file" (change)="onFileChange($event)" multiple="false">
+              <a class="dropdown-item">Bài tập</a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="table-scroll">
+        <div class="scrollable">
+          <div class="table-wrap">
+            <table class="table table-bordered">
+
+              <thead>
+                <tr *ngFor="let row of data">
+                  <td *ngFor="let cell of row">
+                    {{cell}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>STT</td>
+                  <td>MSSV</td>
+                  <td>Tên</td>
+                  <td *ngFor="let d of cotDiemHP">{{d.tenCotDiem}}</td>
+                  <td>Điểm Tổng kết</td>
+                </tr>
+              </thead>
+              <tbody *ngFor="let hs of dsTenHocSinh ; index as stt">
+                <tr>
+                  <td>{{stt+1}}</td>
+                  <td>{{hs.mssv}}</td>
+                  <td>{{hs.ho}} {{hs.ten}}</td>
+                  <ng-template *ngFor="let ct of ctDiem" [ngIf]="hs.mssv== ct.maSinhVien">
+                    <ng-template *ngFor="let t of cotDiemHP" [ngIf]="ct.maCotDiem == t.maCotDiem">
+                        <td >                     
+                            {{ct.diem}}      
+                        </td>
+                    </ng-template>
+                  </ng-template>
+                  <td>
+                    {{hs.diemTongKet}} 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <form class="ml-4">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
+              checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Cho xem điểm
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+              Không cho xem điểm
+            </label>
+          </div>
+          <button type="submit" (click)="luuDiem()" class="btn btn-info">Lưu</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

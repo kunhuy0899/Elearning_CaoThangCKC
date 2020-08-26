@@ -1,0 +1,341 @@
+<app-modal class="modal_chucnang__wrapper" id="cntt_noidungtrangchu">
+  <div
+    (click)="closeModal('cntt_noidungtrangchu')"
+    class="modal_chucnang__close mdi mdi-chevron-left text-white"
+  ></div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white mb-0">Nội dung trang chủ</h1>
+        <!-- <button type="button" (click)="onClickLogData()">log</button> -->
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box card mt-4 bg-white">
+          <h5 class="card-header py-3 text-center">
+            Bài viết quan trọng (0 - baivietquantrong)
+          </h5>
+          <div class="card-body p-0">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Ảnh bìa</th>
+                  <th>Tiêu đề</th>
+                  <th class="text-center">Thời gian đăng</th>
+                  <th class="text-center">Người đăng</th>
+                  <!-- <th class="text-center">
+                    <button
+                      title="Lưu thay đổi"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__plus mdi mdi-content-save-outline mdi-24px"
+                      ></span>
+                    </button>
+                  </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listBaiVietQuanTrong">
+                  <td style="width: 50px;" class="text-center">
+                    <!-- <input class="index" type="text" [value]="i" /> -->
+                    {{ item.thuTuHienThi }}
+                  </td>
+                  <td style="width: 80px;">
+                    <a
+                      data-fancybox
+                      class="box-img"
+                      href="https://localhost:4100/{{ item.anhBia }}"
+                    >
+                      <img
+                        src="https://localhost:4100/{{ item.anhBia }}"
+                        alt=""
+                      />
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      class="text-reset"
+                      href="http://localhost:4300/bai-viet/{{
+                        item._id
+                      }}"
+                      [title]="item.tieuDe"
+                    >
+                      {{ item.tieuDe }}
+                    </a>
+                  </td>
+                  <td style="width: 160px; text-align: center;">
+                    {{ formatDatetime(item.thoiGianDangBai) }}
+                  </td>
+                  <td style="width: 150px; text-align: center;">
+                    <div
+                      class="text-truncate"
+                      style="width: 150px;"
+                      title="{{ item.nguoiViet }}"
+                    >
+                      {{ item.nguoiViet }}
+                    </div>
+                  </td>
+                  <!-- <td style="width: 60px;" class="text-center">
+                    <button
+                      title="Chỉnh sửa thứ tự hiển thị"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__save mdi mdi-file-document-edit-outline mdi-24px"
+                      ></span>
+                    </button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box card mt-5 bg-white">
+          <h5 class="card-header py-3 text-center">
+            Cơ hội việc làm (1 - cohoivieclam)
+          </h5>
+          <div class="card-body p-0">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Ảnh bìa</th>
+                  <th>Tiêu đề</th>
+                  <th class="text-center">Thời gian đăng</th>
+                  <th class="text-center">Người đăng</th>
+                  <!-- <th class="text-center">
+                    <button
+                      title="Thêm bài viết quan trọng mới"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__plus mdi mdi-plus mdi-24px"
+                      ></span>
+                    </button>
+                  </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listCoHoiViecLam">
+                  <td style="width: 50px;" class="text-center">
+                    {{ item.thuTuHienThi }}
+                  </td>
+                  <td style="width: 80px;">
+                    <a
+                      data-fancybox
+                      class="box-img"
+                      href="https://localhost:4100/{{ item.anhBia }}"
+                    >
+                      <img
+                        src="https://localhost:4100/{{ item.anhBia }}"
+                        alt=""
+                      />
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      class="text-reset"
+                      href="http://localhost:4300/bai-viet/{{
+                        item._id
+                      }}"
+                      [title]="item.tieuDe"
+                    >
+                      {{ item.tieuDe }}
+                    </a>
+                  </td>
+                  <td style="width: 160px; text-align: center;">
+                    {{ formatDatetime(item.thoiGianDangBai) }}
+                  </td>
+                  <td style="width: 150px; text-align: center;">
+                    <div
+                      class="text-truncate"
+                      style="width: 150px;"
+                      title="{{ item.nguoiViet }}"
+                    >
+                      {{ item.nguoiViet }}
+                    </div>
+                  </td>
+                  <!-- <td style="width: 60px;" class="text-center">
+                    <button
+                      title="Ẩn bài viết khỏi mục này"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px"
+                      ></span>
+                    </button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box card mt-5 bg-white">
+          <h5 class="card-header py-3 text-center">
+            Giới thiệu ngắn (2 - gioithieungan)
+          </h5>
+          <div class="card-body p-0">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Ảnh bìa</th>
+                  <th>Tiêu đề</th>
+                  <th class="text-center">Thời gian đăng</th>
+                  <th class="text-center">Người đăng</th>
+                  <!-- <th class="text-center">
+                    <button
+                      title="Thêm bài viết quan trọng mới"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__plus mdi mdi-plus mdi-24px"
+                      ></span>
+                    </button>
+                  </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listGioiThieuNgan">
+                  <td style="width: 50px;" class="text-center">
+                    {{ item.thuTuHienThi }}
+                  </td>
+                  <td style="width: 80px;">
+                    <a
+                      data-fancybox
+                      class="box-img"
+                      href="https://localhost:4100/{{ item.anhBia }}"
+                    >
+                      <img
+                        src="https://localhost:4100/{{ item.anhBia }}"
+                        alt=""
+                      />
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      class="text-reset"
+                      href="http://localhost:4300/bai-viet/{{
+                        item._id
+                      }}"
+                      [title]="item.tieuDe"
+                    >
+                      {{ item.tieuDe }}
+                    </a>
+                  </td>
+                  <td style="width: 160px; text-align: center;">
+                    {{ formatDatetime(item.thoiGianDangBai) }}
+                  </td>
+                  <td style="width: 150px; text-align: center;">
+                    <div
+                      class="text-truncate"
+                      style="width: 150px;"
+                      title="{{ item.nguoiViet }}"
+                    >
+                      {{ item.nguoiViet }}
+                    </div>
+                  </td>
+                  <!-- <td style="width: 60px;" class="text-center">
+                    <button
+                      title="Ẩn bài viết khỏi mục này"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px"
+                      ></span>
+                    </button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box card mt-5 bg-white">
+          <h5 class="card-header py-3 text-center">
+            Tin tức nổi bật (3 - tintucnoibat)
+          </h5>
+          <div class="card-body p-0">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Ảnh bìa</th>
+                  <th>Tiêu đề</th>
+                  <th class="text-center">Thời gian đăng</th>
+                  <th class="text-center">Người đăng</th>
+                  <!-- <th class="text-center">
+                    <button
+                      title="Thêm bài viết quan trọng mới"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__plus mdi mdi-plus mdi-24px"
+                      ></span>
+                    </button>
+                  </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listTinTucNoiBat">
+                  <td style="width: 50px;" class="text-center">{{ item.thuTuHienThi }}</td>
+                  <td style="width: 80px;">
+                    <a
+                      data-fancybox
+                      class="box-img"
+                      href="https://localhost:4100/{{ item.anhBia }}"
+                    >
+                      <img
+                        src="https://localhost:4100/{{ item.anhBia }}"
+                        alt=""
+                      />
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      class="text-reset"
+                      href="http://localhost:4300/bai-viet/{{
+                        item._id
+                      }}"
+                      [title]="item.tieuDe"
+                    >
+                      {{ item.tieuDe }}
+                    </a>
+                  </td>
+                  <td style="width: 160px; text-align: center;">
+                    {{ formatDatetime(item.thoiGianDangBai) }}
+                  </td>
+                  <td style="width: 150px; text-align: center;">
+                    <div
+                      class="text-truncate"
+                      style="width: 150px;"
+                      title="{{ item.nguoiViet }}"
+                    >
+                      {{ item.nguoiViet }}
+                    </div>
+                  </td>
+                  <!-- <td style="width: 60px;" class="text-center">
+                    <button
+                      title="Ẩn bài viết khỏi mục này"
+                      class="bg-transparent border-0 p-0"
+                    >
+                      <span
+                        class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px"
+                      ></span>
+                    </button>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

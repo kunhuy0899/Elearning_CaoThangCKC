@@ -1,0 +1,112 @@
+<app-modal class="modal_chucnang__wrapper" id="ctdt_giaovienlophocphan">
+  <div (click)="closeModal('ctdt_giaovienlophocphan')" class="modal_chucnang__close mdi mdi-chevron-left text-white">
+  </div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white">Giáo viên lớp học phần</h1>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Bậc</label>
+                <select class="form-control" [(ngModel)]="ctdt.maBac" (change)="selectBac()">
+                  <option *ngFor="let bac of dsBac" [value]="bac.maBac">{{ bac.tenBac }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Ngành nghề</label>
+                <select class="form-control" [(ngModel)]="ctdt.maNganhNghe" (change)="select()">
+                  <option *ngFor="let nganhnghe of dsNganhNghe" [value]="nganhnghe.maNganhNghe">{{ nganhnghe.tenNganhNghe }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Loại hình đào tạo</label>
+                <select class="form-control" (change)="select()" [(ngModel)]="ctdt.maLoaiHinhDaoTao">
+                  <option value="1">Chính quy</option>
+                  <option value="2">Liên thông</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Khoá</label>
+                <input class="form-control" type="number" min="15" max="50" [(ngModel)]="ctdt.khoaHoc"
+                  (change)="select()">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Lớp học</label>
+                <select class="form-control" #LopHoc (change)="selectLopHoc(LopHoc.value)">
+                  <option value="all">Tất cả</option>
+                  <option *ngFor="let lh of dsLH" [value]="lh.maLopHoc">{{ lh.tenVietTat }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="d-flex justify-content-between">
+            <div class="col">
+              <div class="form-inline">
+                <label class="mr-2">Học kì:</label>
+                <select class="form-control" [(ngModel)]="hocKi" (change)="select()">
+                  <option value="1">Học kì 1</option>
+                  <option value="2">Học kì 2</option>
+                  <option value="3">Học kì 3</option>
+                  <option value="4">Học kì 4</option>
+                  <option value="5">Học kì 5</option>
+                  <option value="6">Học kì 6</option>
+                  <option value="7">Tốt nghiệp</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-inline">
+              <label class="ml-auto mb-0 d-flex align-items-center"><span class="text-nowrap">Bộ lọc: &nbsp;</span>
+                <input class="form-control form-control-sm" placeholder="Nhập từ khoá...">
+              </label>
+            </div>
+          </div>
+          <table class="modal_chucnang__table table table-hover" id="danhsach_giaovienlophocphan">
+            <thead class="bg__caothang text-white">
+              <th class="text-center" scope="col">#</th>
+              <th scope="col">Lớp học phần</th>
+              <th scope="col">Loại môn học</th>
+              <th scope="col">Giáo viên</th>
+              <th scope="col">Số SV</th>
+              <th scope="col">Số SV học ghép</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dsLHP; index as idx">
+                <td class="text-center">{{idx + 1}}</td>
+                <td>
+                  <input class="form-control"  title="haha" [value]="item.tenLopHocPhan" disabled>
+                </td>
+                <td  class="text-center">{{ item.maLoaiMonHoc }}</td>
+                <td>
+                  <select class="form-control" #maGiaoVien (change)="changeGiaoVien(maGiaoVien.value, item.maLopHocPhan)">
+                    <option value="null">Chưa có</option>
+                    <option [value]="gv.maGiaoVien" *ngFor="let gv of dsGV" [selected]="item.maGiaoVien === gv.maGiaoVien">
+                      {{ gv.ho + " " + gv.ten }}
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <div class="text-center">100</div>
+                </td>
+                <td>
+                  <div class="text-center">10</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

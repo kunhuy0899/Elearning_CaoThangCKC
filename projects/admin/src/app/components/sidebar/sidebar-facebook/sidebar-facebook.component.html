@@ -1,0 +1,48 @@
+
+<section class="sidebar_chucnang__wrapper mt-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap justify-content-center">
+      <div class="sidebar_chucnang__item" (click)="openModal('fb_quanlybaidangfacebook')">
+        <div
+          class="sidebar_chucnang__box card border-0 py-3 px-2 px-sm-3 text-center text-decoration-none text-uppercase text-white">
+          <div class="sidebar_chucnang__icon mdi mdi-calendar-blank-multiple mdi-24px"></div>
+          <div class="sidebar_chucnang__text mt-2">Quản lý bài đăng</div>
+        </div>
+      </div>
+      <div class="sidebar_chucnang__item" (click)="openModal('fb_quanlygroupfacebook')">
+        <div
+          class="sidebar_chucnang__box card border-0 py-3 px-2 px-sm-3 text-center text-decoration-none text-uppercase text-white">
+          <div class="sidebar_chucnang__icon mdi mdi-calendar-blank-multiple mdi-24px"></div>
+          <div class="sidebar_chucnang__text mt-2">Quản lý Nhóm</div>
+        </div>
+      </div>
+      <div class="sidebar_chucnang__item" (click)="openModal('fb_quanlypagefacebook')">
+        <div
+          class="sidebar_chucnang__box card border-0 py-3 px-2 px-sm-3 text-center text-decoration-none text-uppercase text-white">
+          <div class="sidebar_chucnang__icon mdi mdi-calendar-blank-multiple mdi-24px"></div>
+          <div class="sidebar_chucnang__text mt-2">Quản lý Trang</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sidebar_chucnang__wrapper mt-4">
+  <div class="container-fluid">
+    <div class="d-flex flex-wrap justify-content-center">
+      <div id="fb-root"></div>
+      <div class="" id="btnLoginFB" type="button" onclick="RequestLoginFB()">
+        <div class="form-inline" style="background-color: #1877f2;border-radius: 10px;padding:5px 5px 5px 5px;">
+          <img src="assets/img/icons/facebook.png" alt="" style="width: 35px;">
+          <p style="font-size:20px;font-weight: 300;color: white;padding:0 8px 0 8px;margin-bottom: 0rem;">ĐĂNG NHẬP</p>
+        </div>
+      </div>
+      <div id="status" >
+        <div style="text-align: center;">
+          <img id="avatar" src="" alt="" style="border-radius: 50%; background-size: contain;
+          background-repeat: no-repeat;">
+        </div>
+        <div id="username" style="font-size:x-large;font-weight: 500; margin-top: 15px;"></div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 style-table">
+            <p class="h3 p-2">Thêm cột điểm</p>
+            <form [formGroup]="formCotDiem" > 
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Tên cột điểm</label>
+                    <div class="col-sm-8" >
+                        <input   formControlName="tenCotDiem" value="{{tenCotDiem}}" type="text" class="form-control" id="inputnamediem" placeholder="Nhập tên cột điểm">
+                   
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Hệ số</label>
+                    <div class="col-sm-8">
+                        <input  formControlName="heSo"  value="{{heSo}}" type="number" min="0" max ="5" class="form-control" id="inputheso" placeholder="Nhập hệ số">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleFormControlTextarea1" class="col-sm-4 col-form-label">Mô tả</label>
+                    <div class="col-sm-8">
+                        <textarea  formControlName="moTa" value="{{moTa}}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    
+                  </div>
+                <div class="form-group row">
+                    <label for="exampleFormControlSelect2" class="col-sm-4 col-form-label">Chọn bài tập </label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="exampleFormControlSelect2" value="{{maBaiTap}}" formControlName="maBaiTap" >
+                            <option *ngFor="let bt of dsBaiTap" value="{{bt.maBaiTap}}">{{bt.tieuDe}}</option>
+                        </select>
+                       
+                    </div>
+                </div>
+              
+            </form>
+            <button [ngStyle]="{'display':quyenThem}" type="submit" class="btn button-style" (click)="themDanhSachCotDiem()">Thêm</button>
+            <button [ngStyle]="{'display':quyenSua}" type="submit" class="btn button-style ml-1" (click)="suaCotDiem()">Lưu</button>
+            <span  style="float:right; font-size: 10px;" class="text-danger">{{err}}</span>
+        </div>
+        <div class="col-md-8 style-table ml-1">
+            <p class="h3 p-2">Danh sách cột điểm</p>
+            <div class="scrollable">
+                <table class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Tên cột điểm</th>
+                            <th scope="col">Hệ số</th>
+                            <th scope="col">Mô tả</th>
+                            <th scope="col">Tên bài tập</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let ds of dsCotDiem ; index as stt">
+                        <tr>
+                            <th scope="row" (click)="layCotDiemTheoMa(ds)">{{stt+1}}</th>
+                            <td>{{ds.tenCotDiem}}</td>
+                            <td>{{ds.heSo}}</td>
+                            <td>{{ds.tinhDiem}}</td>
+                            <ng-template *ngFor="let bt of dsBaiTap" [ngIf]="bt.maBaiTap==ds.maBaiTap">
+                                <td>{{bt.tieuDe}}</td>
+                            </ng-template> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>;

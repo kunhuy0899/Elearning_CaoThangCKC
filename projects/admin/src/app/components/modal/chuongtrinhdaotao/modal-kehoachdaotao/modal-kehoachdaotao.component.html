@@ -1,0 +1,222 @@
+<app-modal class="modal_chucnang__wrapper" id="ctdt_kehoachdaotao">
+  <div (click)="closeModal('ctdt_kehoachdaotao')" class="modal_chucnang__close mdi mdi-chevron-left text-white"></div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white">Quản lý kế hoạch đào tạo</h1>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Bậc</label>
+                <select class="form-control" [(ngModel)]="ctdt.maBac" (change)="selectBac()">
+                  <option *ngFor="let bac of dsBac" [value]="bac.maBac">{{ bac.tenBac }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Ngành nghề</label>
+                <select class="form-control" [(ngModel)]="ctdt.maNganhNghe" (change)="select()">
+                  <option *ngFor="let nganhnghe of dsNganhNghe" [value]="nganhnghe.maNganhNghe">
+                    {{ nganhnghe.tenNganhNghe }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Loại hình đào tạo</label>
+                <select class="form-control" (change)="select()" [(ngModel)]="ctdt.maLoaiHinhDaoTao">
+                  <option value="1">Chính quy</option>
+                  <option value="2">Liên thông</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Khoá</label>
+                <input class="form-control" type="number" min="17" max="50" [(ngModel)]="ctdt.khoaHoc"
+                  (change)="select()">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="modal_chucnang__group__button">
+                <button class="modal_chucnang__button btn btn-outline-primary px-4 mx-2"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/books.png" alt="image icon">
+                  <div>Môn tương đương</div>
+                </button>
+                <button data-toggle="modal" data-target="#saochepkhdt"
+                  class="modal_chucnang__button btn btn-outline-success px-4 mx-2"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/portable-document-format.png"
+                    alt="image icon">
+                  <div>Sao chép</div>
+                </button>
+                <button printSectionId="them_chitiet_chuongtrinhdaotao" ngxPrint
+                  class="modal_chucnang__button btn btn-outline-secondary px-4 mx-2"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/print.png" alt="image icon">
+                  <div>In</div>
+                </button>
+                <button class="modal_chucnang__button btn btn-outline-danger px-4 mx-2" type="reset"
+                  (click)="select()"><img class="modal_chucnang__button__icon mb-2" src="assets/img/icons/error.png"
+                    alt="image icon">
+                  <div>Huỷ</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="d-flex align-items-center mb-3">
+            <div class="ml-auto">
+              <div class="form-inline">
+                <label class="mr-2">Học kì:</label>
+                <select class="form-control" [(ngModel)]="hocKi" (change)="select()">
+                  <option value="1">Học kì 1</option>
+                  <option value="2">Học kì 2</option>
+                  <option value="3">Học kì 3</option>
+                  <option value="4">Học kì 4</option>
+                  <option value="5">Học kì 5</option>
+                  <option value="6">Học kì 6</option>
+                  <option value="7">Tốt nghiệp</option>
+                </select>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <ul class="pagination m-0">
+                <li class="page-item"><a class="page-link text-reset" href="#">Các chứng chỉ</a></li>
+                <li class="page-item"><a class="page-link text-reset" href="#">HP tiếng anh</a></li>
+              </ul>
+            </div>
+            <div class="ml-auto">
+              <div class="form-inline">
+                <label class="mr-2">Chuyên ngành:</label>
+                <select class="form-control">
+                  <option>Tất cả chuyên ngành</option>
+                  <option>CN Mạng máy tính</option>
+                  <option>CN Công nghệ phần mềm</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <table class="modal_chucnang__table table table-hover" id="them_chitiet_chuongtrinhdaotao">
+            <thead class="bg__caothang text-white">
+              <th class="text-center">#</th>
+              <th scope="col">Môn học</th>
+              <th scope="col">Bộ môn</th>
+              <th scope="col">Loại tiền thu</th>
+              <th scope="col">ĐVHT</th>
+              <th scope="col">Số tiết học</th>
+              <th scope="col">Số tuần</th>
+              <th scope="col">Tính</th>
+              <th scope="col">Xét</th>
+              <th class="text-center" scope="col"><span class="modal_chucnang__button__plus mdi mdi-plus mdi-24px"
+                  (click)="addNewKHDT()"></span><span
+                  class="ml-2 modal_chucnang__button__save mdi mdi-content-save-outline mdi-24px"
+                  (click)="saveKHDT()"></span></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dsKHDT; index as idx">
+                <td class="text-center">{{ item.maDaoTao }}</td>
+                <td>
+                  <select class="form-control" [(ngModel)]="item.maMonHoc" (change)="selectMonHoc(idx)">
+                    <option *ngFor="let mh of dsMonHoc" [value]="mh.maMonHoc"
+                      [selected]="mh.maMonHoc === item.maMonHoc">
+                      {{mh.tenMonHoc}}
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" [(ngModel)]="item.maBoMon">
+                    <option value="002">Cơ khí</option>
+                    <option value="003">Ô tô</option>
+                    <option value="001">Tin học</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" [(ngModel)]="item.loaiTienThu">
+                    <option>Lý thuyết</option>
+                    <option>Thực hành</option>
+                    <option>Tốt nghiệp</option>
+                    <option>Module</option>
+                  </select>
+                </td>
+                <td style="max-width: 100px">
+                  <input class="form-control" placeholder="ĐVHT" [(ngModel)]="item.donViHocTrinh">
+                </td>
+                <td style="max-width: 100px">
+                  <input class="form-control" placeholder="Số tiết học" [(ngModel)]="item.soTietHoc">
+                </td>
+                <td style="max-width: 100px">
+                  <input class="form-control" placeholder="Số tuần" [(ngModel)]="item.soTuan">
+                </td>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" [(ngModel)]="item.tinh">
+                  </div>
+                </td>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" [(ngModel)]="item.xet">
+                    <!-- <input class="custom-control-input" id="kehoachdaotaocheckbox2" type="checkbox">
+                    <label class="custom-control-label" for="kehoachdaotaocheckbox2"></label> -->
+                  </div>
+                </td>
+                <td class="text-center">
+                  <span class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px"
+                    (click)="removeKHDT(idx)"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="saochepkhdt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sao chép KHĐT</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Bậc</label>
+              <input class="form-control" type="text" [value]="hocKi" disabled>
+            </div>
+            <div class="d-flex justify-content-around">
+              <div class="col">
+                <label>Bậc</label>
+                <input class="form-control" type="text" [value]="hocKi" disabled>
+              </div>
+              <div class="col">
+                <label>Chọn khoá sao chép</label>
+                <input class="form-control" type="number" value="18" min="17" max="50">
+              </div>
+            </div>
+            <div class="d-flex justify-content-around">
+              <div class="col">
+                <label>Học kì sao chép</label>
+                <input class="form-control" type="text" [value]="hocKi" disabled>
+              </div>
+              <div class="col">
+                <label>Chọn khoá sao chép</label>
+                <input class="form-control" type="number" value="18" min="17" max="50">
+              </div>
+            </div>
+            <div class="form-group">
+              <h5>Danh sách KHĐT</h5>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-primary">Sao chép</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

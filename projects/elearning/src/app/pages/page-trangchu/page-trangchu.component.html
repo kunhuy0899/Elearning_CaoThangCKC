@@ -1,0 +1,82 @@
+<nav id="timkiem">
+    <div class="search"style="text-align: center;margin-top:2%;">
+        <button type="button" class="btn btn-primary" (click)="danhSachLopHocPhan()" (click)=" danhSachLopGV()">Tìm Kiếm</button>
+    </div>
+  </nav>
+<div class="lophoc-container">
+    <div class="list-lophoc">
+        <div class="list-lophoc-item" *ngFor="let l of filterDsLop" (change)="danhSachLopHocPhan()">
+            <div class="list-title bg1">
+                <div class="name--menu">
+                    <div class="name-class">
+                        <div>
+                        <ng-template *ngFor="let lop of dsLop" [ngIf]="l.maLopHoc == lop.maLopHoc">
+                                <a [routerLink]="[{ outlets: { primary: ['lophocphan',l.maLopHocPhan], navbar: ['lophocphan',l.maLopHocPhan] } }]">{{l.tenLopHocPhan}}</a>
+                        </ng-template>
+                    </div>
+                        <div>
+                            <span>Số Lượng:{{l.soLuongSV}}</span>
+                        </div>
+                        <div>
+                            <span>
+                                ĐVHP : 9
+                            </span>
+                        </div>
+                        <div>
+                            <ng-template [ngIf]="l.tinhTrangNopDiem==1"> <span>Trạng thái: đang học</span></ng-template>
+                            <ng-template [ngIf]="l.tinhTrangNopDiem!=1"> <span>Trạng thái: Đã nộp điểm</span>
+                            </ng-template>
+
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <button mat-button [matMenuTriggerFor]="menu"><i class="fa fa-ellipsis-v"
+                                aria-hidden="true"></i></button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>Di chuyển</button>
+                            <button mat-menu-item>Chỉnh sửa</button>
+                            <button mat-menu-item>Lưu trữ</button>
+                            <button mat-menu-item>Sao chép</button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+            <div class="list-main">
+                <div class="list-main-pd">
+                    <div class="list-bdb">
+                        <div class="lm-denhang">
+                            <span>Đến hạng thứ 2</span>
+                        </div>
+                        <div class="lm-gio-ten">
+                            <a href="#">12:59 - Bài tập số 1</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-bottom">
+                <div class="list-bt">
+                    <div class="name-teacher">
+                        <div>
+                            <ng-template *ngFor="let hp of dsGVLHP" [ngIf]="l.maLopHocPhan== hp.maLopHocPhan">
+                                <ng-template *ngFor="let gv of dsTenGv" [ngIf]="gv.maGiaoVien==hp.maGiaoVien">
+                                    <span> {{gv.ho}} {{gv.ten}}</span>
+                                </ng-template>
+                            </ng-template>
+
+
+                        </div>
+                    </div>
+                    <div class="icon-go">
+                        <button mat-button><i class="fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="list-image">
+                <img class="gb_Ka gbii"
+                    src="https://lh3.googleusercontent.com/ogw/ADGmqu_vadAF8Gx0HOS6n8ZRxxCWPLDTEJUnSe0So5rs=s32-c-mo"
+                    srcset="https://lh3.googleusercontent.com/ogw/ADGmqu_vadAF8Gx0HOS6n8ZRxxCWPLDTEJUnSe0So5rs=s32-c-mo 1x, https://lh3.googleusercontent.com/ogw/ADGmqu_vadAF8Gx0HOS6n8ZRxxCWPLDTEJUnSe0So5rs=s64-c-mo 2x "
+                    alt="" aria-hidden="true" data-noaft="">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+
+  <section class="mt-4">
+      <div class="container">
+          <div class="row">
+                  <div class="col-12">
+                          <div class="breadcrumbs">
+                              <a class="breadcrumb__step breadcrumb__step--active" routerLink="/">Trang chủ</a>
+                              <a class="breadcrumb__step" >Tin tức</a>
+                              <a class="breadcrumb__step" >{{TinTuc.tentintuc}}</a>
+                          </div>
+                  </div>
+          </div>
+      </div>
+  </section>
+  <section class="news-detail mt-40 mb-40">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-9">
+                  <div class="post-wrap">
+                      <h2 class="sub-title">{{TinTuc.tentintuc}}</h2>
+                      <!-- <div *ngIf="TinTuc.updated_at!=null" class="posted"><i class="far fa-clock"></i>{{formatDatetime(TinTuc.updated_at)}}</div> -->
+                      <div class="posted"><i class="far fa-clock"></i>{{formatDatetime(TinTuc.created_at)}}</div>
+                      <div class="post-content" [innerHTML]="TinTuc.noidung" >
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <div class="other-news">
+                      <h3 class="sub-title">TIN TỨC MỚI NHẤT</h3>
+                      <div class="sub-news" *ngFor="let item of TinTucKhac">
+                          <div class="img-wrap"><img src="{{item.image}}" alt="co-khi"></div><a class="sub-title" href="/chitiettintuc/{{item._id}}">{{item.tentintuc}}</a>
+                          <!-- <div *ngIf="TinTuc.updated_at!=null" class="posted"><i class="far fa-clock"></i>{{formatDatetime(TinTuc.updated_at)}}</div> -->
+                          <div class="posted"><i class="far fa-clock"></i>{{formatDatetime(TinTuc.created_at)}}</div>
+                          <div class="news-content limit" [innerHTML]="item.description">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>

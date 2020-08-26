@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "5f350b42ba69292ad81be788"
+  },
+  "tenkhoahoc": "Thiết kế website",
+  "image": "https://localhost:4100/uploads/cntt/ctdt2.png",
+  "makhoahoc": "TKW",
+  "color": "#E65527",
+  "nhapdiem": "Nhập riêng",
+  "trangthai": true,
+  "nguoitao": "admin",
+  "nguoisua": null,
+  "created_at": {
+    "$date": "2020-08-13T09:43:29.997Z"
+  },
+  "updated_at": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f350b6bba69292ad81be789"
+  },
+  "tenkhoahoc": "Tin học văn phòng",
+  "image": "https://localhost:4100/uploads/cntt/ctdt9.png",
+  "makhoahoc": "THVP",
+  "color": "#86B3BB",
+  "nhapdiem": "Nhập riêng",
+  "trangthai": true,
+  "nguoitao": "admin",
+  "nguoisua": null,
+  "created_at": {
+    "$date": "2020-08-13T09:44:11.708Z"
+  },
+  "updated_at": null,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f350b8fba69292ad81be78a"
+  },
+  "tenkhoahoc": "Mạng máy tính",
+  "image": "https://localhost:4100/uploads/cntt/ctdt6.png",
+  "makhoahoc": "MMT",
+  "color": "#D5BCBA",
+  "nhapdiem": "Nhập riêng",
+  "trangthai": true,
+  "nguoitao": "admin",
+  "nguoisua": null,
+  "created_at": {
+    "$date": "2020-08-13T09:44:47.788Z"
+  },
+  "updated_at": null,
+  "__v": 0
+}]

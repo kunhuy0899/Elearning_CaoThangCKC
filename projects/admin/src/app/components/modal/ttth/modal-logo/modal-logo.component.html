@@ -1,0 +1,78 @@
+<app-modal class="modal_chucnang__wrapper" id="ttth-logo">
+  <div (click)="closeModal('ttth-logo')" class="modal_chucnang__close mdi mdi-chevron-left text-white"></div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white">Quản lý thông tin website</h1>
+      </div>
+      <div class="col-12" *ngFor="let item of ThongTinWeb">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-left align-items-center">
+            <div class="col-auto">
+              <div class="form-group">
+                <label>Logo (900x400)</label>
+                  <div class="upload-btn-wrapper text-center">
+                    <div class="box-img">
+                      <img [src]="imageSrc || item.logo"/>
+                    </div>
+                    <input type="file" id="logo" name="image" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)"
+                      accept="image/x-png|image/gif|image/jpeg|image/jpg"/>
+                    <label for="logo" class="btn btn-outline-dark btn-sm btn-block w-100 mb-0 mt-2">
+                      Chọn hình ảnh
+                    </label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Địa chỉ</label>
+                <input type="text" class="form-control" [(ngModel)]="item.diachi">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" [(ngModel)]="item.email">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Hotline</label>
+                <input type="text" class="form-control" [(ngModel)]="item.hotline">
+              </div>
+              <div class="form-group">
+                <label>Copyright</label>
+                <input type="text" class="form-control" [(ngModel)]="item.copyright">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label>Giờ làm việc</label>
+                <textarea class="form-control" [(ngModel)]="item.giolamviec"></textarea>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12">
+                  <label>Liên kết mạng xã hội( theo thứ tự ngoài website)</label>
+                </div>
+                <div class="col-3"*ngFor="let mxh of item.mxh">
+                  <div class="form-group" >
+                    <small class="form-text text-muted">Link</small>
+                    <input type="text" class="form-control" [(ngModel)]="mxh.link">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto text-center">
+              <div class="modal_chucnang__group__button">
+                <button class="modal_chucnang__button btn btn-outline-success px-4 mx-2" (click)="saveThongTinWeb(item);uploader.uploadAll()"><img
+                    class="modal_chucnang__button__icon mb-2" src="assets/img/icons/upgrade.png" alt="image icon">
+                  <div>Cập nhật</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

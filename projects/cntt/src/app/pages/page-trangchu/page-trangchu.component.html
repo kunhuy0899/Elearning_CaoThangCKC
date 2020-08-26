@@ -1,0 +1,128 @@
+<!-- <button (click)="logData()">log</button> -->
+<app-slider-highlight
+  [BaiVietDauTien]="baiVietQuanTrongDauTien"
+  [DanhSachBaiVietQuanTrong]="listBaiVietQuanTrong"
+>
+</app-slider-highlight>
+<app-slider-cohoivieclam
+  [MoTaNganViecLam]="baiVietMoTaNganViecLam"
+  [DanhSachCoHoiViecLam]="listCoHoiViecLam"
+></app-slider-cohoivieclam>
+<app-tienichsv></app-tienichsv>
+<section class="quote_home__wrapper bg__image__2 shadow py-5">
+  <div
+    class="container-fluid"
+    data-aos="fade-up"
+    data-aos-delay="300"
+    data-aos-duration="1500"
+  >
+    <div class="row">
+      <div class="col-12">
+        <blockquote class="quote_home__blockquote blockquote border-0 m-0">
+          <div
+            class="h2 mb-3 text-white text-justify text-md-center"
+            [innerHTML]="gioiThieuNganDauTien.noiDung"
+          ></div>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+<app-slider-tintucnoibat
+  [DanhSachTinTucNoiBat]="listTinTucNoiBat"
+></app-slider-tintucnoibat>
+<app-slidersinhvien></app-slidersinhvien>
+<app-donvilienket></app-donvilienket>
+<footer
+  class="footer_master bg__caothang__light border-bottom pt-4 pt-md-5 pb-2 pb-md-5 text-white"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3">
+        <a [routerLink]="['/']"
+          ><img class="footer_logo" [src]="logoMenuMobile"
+        /></a>
+        <nav class="footer_text mt-2 mt-lg-3">
+          <li class="d-flex mt-2">
+            <span class="mr-2 mdi mdi-map-marker"></span
+            ><span>{{ diaChi }}</span>
+          </li>
+          <li class="d-flex mt-2">
+            <span class="mr-2 mdi mdi-phone"></span
+            ><span>{{ soDienThoai }}</span>
+          </li>
+          <li class="d-flex mt-2">
+            <span class="mr-2 mdi mdi-email"></span><span>{{ email }}</span>
+          </li>
+        </nav>
+      </div>
+      <div class="col-lg">
+        <div class="row">
+          <div class="col-sm-6 col-md mt-3 mt-lg-0">
+            <div class="footer_title text-uppercase">
+              <a href="{{footer.url1}}" class="text-white">{{
+                footer.name1
+              }}</a>
+            </div>
+            <nav class="footer_text mt-2 mt-lg-3">
+              <li class="mt-2" *ngFor="let item1 of footer.sub1">
+                <a class="text-reset" href="{{item1.url}}">{{
+                  item1.name
+                }}</a>
+              </li>
+            </nav>
+          </div>
+          <div class="col-sm-6 col-md mt-3 mt-lg-0">
+            <div class="footer_title text-uppercase">
+              <a href="{{footer.url2}}" class="text-white">{{
+                footer.name2
+              }}</a>
+            </div>
+            <nav class="footer_text mt-2 mt-lg-3">
+              <li class="mt-2" *ngFor="let item2 of footer.sub2">
+                <a class="text-reset" href="{{item2.url}}">{{
+                  item2.name
+                }}</a>
+              </li>
+            </nav>
+          </div>
+          <div class="col-sm-6 col-md mt-3 mt-lg-0">
+            <div class="footer_title text-uppercase">
+              <a href="footer.url3" class="text-white">{{
+                footer.name3
+              }}</a>
+            </div>
+            <nav class="footer_text mt-2 mt-lg-3">
+              <li class="mt-2" *ngFor="let item3 of footer.sub3">
+                <a class="text-reset" href="{{item3.url}}">{{
+                  item3.name
+                }}</a>
+              </li>
+            </nav>
+          </div>
+          <div class="col-sm-6 col-md mt-3 mt-lg-0">
+            <div class="footer_title text-uppercase">E-Learning</div>
+            <div class="footer_text mt-2">
+              Ứng dụng E - Learning của trường Cao Đẳng Kỹ Thuật Cao Thắng
+            </div>
+            <div class="mt-2 ml-n1">
+              <a [routerLink]="['/']"
+                ><img
+                  class="m-1"
+                  height="30"
+                  src="assets/img/backgrounds/tai-appstore.jpg"
+                  alt="Tải ứng dụng App Store" /></a
+              ><a [routerLink]="['/']"
+                ><img
+                  class="m-1"
+                  height="30"
+                  src="assets/img/backgrounds/tai-google-play.jpg"
+                  alt="Tải ứng dụng Google Play"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

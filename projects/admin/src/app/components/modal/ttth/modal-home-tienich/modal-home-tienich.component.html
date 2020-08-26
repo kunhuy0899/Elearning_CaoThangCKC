@@ -1,0 +1,141 @@
+<app-modal class="modal_chucnang__wrapper" id="ttth-home-tienich">
+  <div (click)="closeModal('ttth-home-tienich')" class="modal_chucnang__close mdi mdi-chevron-left text-white"></div>
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center text-white">Quản lý tiện ích sinh viên</h1>
+      </div>
+      <div class="col-12" [ngClass]="{ 'd-none': selectedItem }">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-4">
+              <div class="form-group">
+                <label>Tiêu đề </label>
+                <input type="text" class="form-control" #ten>
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea class="form-control" #mota></textarea>
+              </div>
+              <div class="form-group">
+                <label>Đường dẫn (nếu không có thì hãy nhập #)</label>
+                <input type="text" class="form-control "#link>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="form-group">
+                <label>Tải hình ảnh (512x512)</label>
+                  <div class="upload-btn-wrapper text-center">
+                    <div class="box-img">
+                      <img  [src]="imageSrc"/>
+                    </div>
+                    <input type="file" id="tienich" name="image" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)"
+                      accept="image/x-png|image/gif|image/jpeg|image/jpg"/>
+                    <label for="tienich" class="btn btn-outline-dark btn-sm btn-block w-100 mb-0 mt-2">
+                      Chọn hình ảnh
+                    </label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="modal_chucnang__group__button">
+                <button class="modal_chucnang__button btn btn-outline-primary px-4 mx-2" [disabled]="!ten.value || !mota.value|| !link.value || !imageSrc"><img
+                  (click)="add(ten.value,mota.value, link.value);ten.value=''; mota.value=''; link.value='';uploader.uploadAll()"  class="modal_chucnang__button__icon mb-2" src="assets/img/icons/add.png" alt="image icon">
+                  <div>Thêm mới</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="selectedItem">
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-4">
+              <div class="form-group">
+                <label>Tiêu đề </label>
+                <input type="text" class="form-control" [(ngModel)]="selectedItem.ten">
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <textarea class="form-control" [(ngModel)]="selectedItem.mota"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Đường dẫn (nếu không có thì hãy nhập #)</label>
+                <input type="text" class="form-control " [(ngModel)]="selectedItem.link">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="form-group">
+                <label>Tải hình ảnh (512x512)</label>
+                  <div class="upload-btn-wrapper text-center">
+                    <div class="box-img">
+                      <img  [src]="imageSrc || selectedItem.image"/>
+                    </div>
+                    <input type="file" id="tienich1" name="image" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)"
+                      accept="image/x-png|image/gif|image/jpeg|image/jpg"/>
+                    <label for="tienich1" class="btn btn-outline-dark btn-sm btn-block w-100 mb-0 mt-2">
+                      Chọn hình ảnh
+                    </label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="modal_chucnang__group__button">
+                <button class="modal_chucnang__button btn btn-outline-success px-4 mx-2"
+                  (click)="update(selectedItem);uploader.uploadAll()"><img class="modal_chucnang__button__icon mb-2"
+                    src="assets/img/icons/upgrade.png" alt="image icon">
+                  <div>Cập nhật</div>
+                </button>
+                <button  (click)="reset()"  type="reset"  class="btn btn-outline-dark px-4 mx-2">
+                  <img class="modal_chucnang__button__icon mb-2"
+                  src="assets/img/icons/error.png"    alt="image icon"  />
+                  <div>Huỷ bỏ</div>
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" >
+        <div class="modal_chucnang__box border rounded p-4 mt-5 bg-white">
+          <table class="modal_chucnang__table table table-hover" *ngIf="TienIch" datatable="ng">
+            <thead class="bg__caothang text-white">
+              <tr>
+                <th>#</th>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Image</th>
+                <th scope="col">Link</th>
+                <th scope="col">Người tạo</th>
+                <th scope="col">Người sửa</th>
+                <th scope="col">Trạng thái</th>
+                <th class="text-center" scope="col"><span
+                    class="modal_chucnang__button__save mdi mdi-content-save-outline mdi-24px"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of TienIch; let i = index">
+                <td style="max-width: 50px">{{i + 1}}</td>
+                <td>{{item.ten}}</td>
+                <td>{{item.mota}}</td>
+                <td style="max-width: 100px">
+                  <img style="width: 60px;height: 60px;" src="{{item.image}}" alt="">
+                </td>
+                <td>{{item.link}}</td>
+                <td>{{item.nguoitao}}</td>
+                <td>{{item.nguoisua}}</td>
+                <td *ngIf="item.trangthai==false">Đã xóa</td>
+                <td *ngIf="item.trangthai==true">Hiển thị</td>
+                <td class="text-center"*ngIf="item.trangthai==true" >
+                  <span class="modal_chucnang__button__delete mdi mdi-file-document-edit-outline mdi-24px  mr-2" (click)="onSelect(item);imageSrc=null"></span>
+                  <span class="modal_chucnang__button__delete mdi mdi-delete-outline mdi-24px" (click)="delete(item)"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal>

@@ -1,0 +1,13 @@
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+  .style-icon{
+    padding-right: 7px;
+    display: inline-block;
+  }
+  @media only screen and (max-width: 600px){
+    .style-magintop{
+      margin-top: 120px;
+    }
+  }
